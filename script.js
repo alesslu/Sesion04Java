@@ -132,24 +132,50 @@
 // "Ingrese la informacion del usuario (nombre, apellido, edad, profesion)"
 // El usuario digitara: Andres, Perez, 28, ingeniero.
 // La informacion debe ser guardada como objeto dentro del array users asignadole un id unico a cada registro.
+// let arrayusers = []
+// let usuario = prompt ("Ingrese la información del usuario (nombre, apellido, edad, profesion)")
+// let cadenausuario = usuario.split (", ")
+// console.log(cadenausuario)
+
+// function insertarusuario (){
+//     let id = arrayusers.length +1
+//     let dia = new Date()
+//     arrayusers.push (
+//         {
+//             id:id,nombre:cadenausuario[0], apellido: cadenausuario[1], edad: cadenausuario[2], profesion: cadenausuario[3], dia:dia
+//         }
+//     )
+    
+// }
+// insertarusuario()
+// console.log(arrayusers)
  
 //11. Utilizando el objeto Date, añadir la propiedad created_date de manera interna en donde se registre el
 // momento en que ese registro fue creado.
- 
+
 //12.
  
-// let users = [
-//     {id: 1, nombre: "Andres", apellido: "Pacheco", edad: 38, profesion: "developer", created_at: "2022-09-26T06:25:21.118Z"},
-//     {id: 2, nombre: "Andrea", apellido: "Sanchez", edad: 25, profesion: "profesor", created_at: "2022-04-18T14:14:32.879Z"},
-//     {id: 3, nombre: "Julia", apellido: "Ochoa", edad: 32, profesion: "musico", created_at: "2021-12-14T11:53:38.279Z"},
-//     {id: 4, nombre: "Samuel", apellido: "Martinez", edad: 29, profesion: "programador", created_at: "2022-01-26T03:31:15.202Z"},
-//     {id: 5, nombre: "Roberto", apellido: "Mattos", edad: 40, profesion: "chef", created_at: "2022-07-27T02:06:22.760Z"},
-//     {id: 6, nombre: "Mercedes", apellido: "Sanchez", edad: 35, profesion: "veterinario", created_at: "2022-05-01T22:06:35.864Z"},
-// ]
+let users = [
+    {id: 1, nombre: "Andres", apellido: "Pacheco", edad: 38, profesion: "developer", created_at: "2022-09-26T06:25:21.118Z"},
+    {id: 2, nombre: "Andrea", apellido: "Sanchez", edad: 25, profesion: "profesor", created_at: "2022-04-18T14:14:32.879Z"},
+    {id: 3, nombre: "Julia", apellido: "Ochoa", edad: 32, profesion: "musico", created_at: "2021-12-14T11:53:38.279Z"},
+    {id: 4, nombre: "Samuel", apellido: "Martinez", edad: 29, profesion: "programador", created_at: "2022-01-26T03:31:15.202Z"},
+    {id: 5, nombre: "Roberto", apellido: "Mattos", edad: 40, profesion: "chef", created_at: "2022-07-27T02:06:22.760Z"},
+    {id: 6, nombre: "Mercedes", apellido: "Sanchez", edad: 35, profesion: "veterinario", created_at: "2022-05-01T22:06:35.864Z"},
+]
  
 // Crear una funcion que permita ordenar la lista de usuarios por fecha de creacion, de la mas nueva a la mas antigua y viceversa
 // utilizando el parametro booleano reverse (si es true se ordenaran de nuevo a antiguo)
- 
+function ordenar (){
+    const orden = users.sort((a,b) => a.created_at - b.created_at)
+    console.log(orden)
+    const contrario = orden.reverse()
+    console.log(contrario)
+    console.log(orden)
+}
+ordenar()
+
+
 //13. Crear una funcion que permita filtrar los usuarios por mes y año de creacion.
  
 //14. Elaborar un programa que permita al admin a traves de prompts y alerts lo siguiente:
