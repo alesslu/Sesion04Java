@@ -152,7 +152,18 @@
  
 //11. Utilizando el objeto Date, añadir la propiedad created_date de manera interna en donde se registre el
 // momento en que ese registro fue creado.
-
+// let now = new Date()
+// let dia = now.getDate()
+// let mes = now.getMonth() + 1
+// let year = now.getFullYear()
+// let hora = now.getHours()
+// let minutos = now.getMinutes()
+// let segundos = now.getSeconds()
+// let miliSegundos = now.getMilliseconds()
+// let fecha = dia + "/" + mes + "/" + year
+// let tiempo = hora + ":" + minutos+ ":" + segundos+ ":"+ miliSegundos
+// console.log(fecha);
+// console.log(tiempo);
 //12.
  
 let users = [
@@ -163,27 +174,128 @@ let users = [
     {id: 5, nombre: "Roberto", apellido: "Mattos", edad: 40, profesion: "chef", created_at: "2022-07-27T02:06:22.760Z"},
     {id: 6, nombre: "Mercedes", apellido: "Sanchez", edad: 35, profesion: "veterinario", created_at: "2022-05-01T22:06:35.864Z"},
 ]
+
  
 // Crear una funcion que permita ordenar la lista de usuarios por fecha de creacion, de la mas nueva a la mas antigua y viceversa
 // utilizando el parametro booleano reverse (si es true se ordenaran de nuevo a antiguo)
-function ordenar (){
-    const orden = users.sort((a,b) => a.created_at - b.created_at)
-    console.log(orden)
-    const contrario = orden.reverse()
-    console.log(contrario)
-    console.log(orden)
+// function ordenar (){
+//     let orden = users.sort((a,b) => a.id - b.id)
+//     console.log(orden)
+//     if(orden== true){
+//         let contrario = orden.reverse()
+       
+//     }
+//    console.log(contrario) 
+//}
+// ordenar()
+
+function sortUsuario(argument){
+    if (argument === "nombre" || argument === "apellido" || argument === "profesion"){
+        users.sort((a,b) => a[argument].localeCompare(b[argument]))
+    } else {
+        users.sort((a,b) => a[argument] - b[argument])
+    }
+    console.log(users)
 }
-ordenar()
 
 
 //13. Crear una funcion que permita filtrar los usuarios por mes y año de creacion.
- 
+
+function filtrarusuario(mes, anio) {
+    let usuariofiltrado = users.filter(
+      (element) => new Date(element.created_at).getMonth() === (mes - 1) && new Date(element.created_at).getFullYear() === anio
+    );
+    console.log(usuariofiltrado);
+  }
+  filtrarusuario(7, 2022);
+
 //14. Elaborar un programa que permita al admin a traves de prompts y alerts lo siguiente:
+//1. Digite la opción para: Crear, Leer, Modificar y Eliminar un usuario
+
+    let opciones = prompt (
+        'Bienvenido Administrador'+
+    '\n1. Crear Usuario Nuevo ' +
+    '\n2. Leer Usuarios: ' +
+    '\n3. Actualizar Usuario ' +
+    '\n4. Borrar Usuario '
+)
+
+switch (opciones) {
+    case '1':
+        insertarusuario()
+        break
+    
+    case '2': 
+        leerusuario()
+        break
+
+    case '3':
+        actualizarusuario()
+        break
+
+    case '4':
+        borrarusuario()
+        break
+
+    
+}
+
 // CREATE
-// El admin debe poder crear un nuevo registro de usuario utilizando la funcion 10.
- 
+
+function insertarusuario (){
+    
+    let idusuario = prompt ("Ingrese la información del usuario (nombre, apellido, edad, profesion)")
+    if (idusuario===users.id){
+        console.log(users.id)
+    }
+    let cadenausuario = usuarionuevo.split (", ")
+    let id = users.length +1
+    let dia = new Date()
+    users.push (
+        {
+            id:id,nombre:cadenausuario[0], apellido: cadenausuario[1], edad: cadenausuario[2], profesion: cadenausuario[3], created_at: cadenausuario[4], dia:dia
+        }
+    )
+    console.log(users)
+}
+
+
 // READ
 // El admin debe poder visualizar en pantalla los registros que estan siendo creados.
+function leerusuario(){
+    const tablausuarios = document.getElementById("tabla")
+    const table = document.createElement("table")
+    table.setAttribute("border", "1")
+    tablausuarios.append(table)
+ 
+// HEADERS
+    const tr = document.createElement("tr")
+    table.append(tr)
+    for(const prop in users[0]){
+    const th = document.createElement("th")
+    th.textContent = prop
+    th.style.cursor = "pointer"
+    th.addEventListener("click", () => {
+        sortUsuario(prop)
+        table.innerHTML = ""
+        table.append(tr)
+        createTableBody()
+    })
+    tr.append(th)
+}
+// TABLE BODY
+function createTableBody(){
+    for(const index in users){
+        const trb = document.createElement("tr")
+        for(const prop in users[index]){
+            const td = document.createElement("td")
+            td.textContent = users[index][prop]
+            trb.append(td)
+        }
+        table.append(trb)
+    }
+}
+}
  
 // UPDATE
 // El admin, al presionar un boton: "Modificar registro" en la parte inferior de la lista de registros, debe
@@ -191,7 +303,31 @@ ordenar()
 // debe volver a la pagina inicial. Si elige modificar alguno, debe aparecer nuevamente el prompt del ejercicio 10
 // OJO: Cuando el admin modifique el registro, no se debe modificar la fecha de creacion, en su lugar debe aparecer
 // un nuevo campo de fecha de modificacion.
- 
+const boton = document.getElementById ("modificar")
+boton.addEventListener ("click", () => {
+    let modificarusuario = prompt ("Ingrese el id del usuario a modificar")
+    if (modificarusuario<users.length) {
+            actualizarusuario()
+            
+
+    }else{
+        alert('no se aplican cambios')
+    }
+})
+
+function actualizarusuario (){
+    let usuarionuevo = prompt ("Ingrese la información del usuario (nombre, apellido, edad, profesion)")
+    let cadenausuario = usuarionuevo.split (", ")
+    let id = users.length +1
+    let modificacion = new Date ()
+    users.push (
+        {
+            id:id,nombre:cadenausuario[0], apellido: cadenausuario[1], edad: cadenausuario[2], profesion: cadenausuario[3], modificacion:modificacion
+        }
+    )
+    console.log(users)
+}
+
 // DELETE
 // El admin, al presionar un boton: "Borrar registro" en la parte inferior de la lista de registros, debe ver
 // un prompt que le pida ingresar el id del registro que desea borrar. Al dar click, debe aparecer un prompt
