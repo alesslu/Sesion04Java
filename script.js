@@ -178,16 +178,18 @@ let users = [
  
 // Crear una funcion que permita ordenar la lista de usuarios por fecha de creacion, de la mas nueva a la mas antigua y viceversa
 // utilizando el parametro booleano reverse (si es true se ordenaran de nuevo a antiguo)
-// function ordenar (){
-//     let orden = users.sort((a,b) => a.id - b.id)
-//     console.log(orden)
-//     if(orden== true){
-//         let contrario = orden.reverse()
-       
+// function ordenar(reverse) {
+//     for(index in users){
+//         users[index].created_at = new Date(users[index].created_at)
 //     }
-//    console.log(contrario) 
-//}
-// ordenar()
+//     if (reverse === true) {
+//         users.sort((a, b) => b["created_at"] - a["created_at"])
+//     }else{
+//         users.sort((a, b) => a["created_at"] - b["created_at"]) 
+//     }
+//     console.log(users)
+// }
+// ordenar(true)
 
 function sortUsuario(argument){
     if (argument === "nombre" || argument === "apellido" || argument === "profesion"){
